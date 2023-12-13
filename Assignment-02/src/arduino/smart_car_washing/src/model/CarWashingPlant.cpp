@@ -154,7 +154,7 @@ double CarWashingPlant::getCurrentTemperature(){
 void CarWashingPlant::sampleCarDistance(){   
     double d = pSonar->getDistance();
     if (d == NO_OBJ_DETECTED){
-        this->currentCarDistance = -1;
+        this->currentCarDistance = 1000000;
     } else {
         this->currentCarDistance = d;
     }

@@ -35,6 +35,7 @@ void CheckOutTask::tick(){
     case CAR_LEAVING: {
         logOnce(F("[CO] Car leaving"));
         pPlant->sampleCarDistance();
+        // Logger.log(String(pPlant->getCurrentCarDistance()));
         if (pPlant->getCurrentCarDistance() >= MAX_CAR_DISTANCE){
             setState(CAR_OUT);
         }
@@ -43,6 +44,7 @@ void CheckOutTask::tick(){
     case CAR_OUT: {
         logOnce(F("[CO] Car out"));
         pPlant->sampleCarDistance();
+        // Logger.log(String(pPlant->getCurrentCarDistance()));
         if (pPlant->getCurrentCarDistance() < MAX_CAR_DISTANCE){
             setState(CAR_LEAVING);
         } else if (elapsedTimeInState() > CAR_OUT_TIMEOUT){
