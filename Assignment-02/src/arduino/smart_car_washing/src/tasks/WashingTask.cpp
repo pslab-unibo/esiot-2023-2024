@@ -4,8 +4,8 @@
 #include "kernel/Logger.h"
 #include "tasks/BlinkTask.h"
 
-#define WASHING_TIMEOUT ((double) 10000)
-#define MAX_TEMPERATURE 30
+#define WASHING_TIMEOUT ((double) 20000)
+#define MAX_TEMPERATURE 25
 #define MAX_TEMPERATURE_TIMEOUT 5000
 
 WashingTask::WashingTask(CarWashingPlant* pPlant, UserConsole* pUserConsole, BlinkTask* pBlinkTask): 
@@ -69,6 +69,7 @@ void WashingTask::tick(){
     case WASHING_SUSPENDED: {
         logOnce(F("[WT] suspended"));
         if (pPlant->isReadyForWashing()){
+            lastTimeWashing = millis();
             pPlant->washingStarted();
             setState(WASHING);
         }
